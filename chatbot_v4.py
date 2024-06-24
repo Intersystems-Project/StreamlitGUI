@@ -32,8 +32,8 @@ def initialize_llm(llm_choice, api_key):
             response = co.generate(model='command', prompt="test")
             llm = ChatCohere(model="command", temperature=0, cohere_api_key=api_key)
         elif llm_choice == 'Google Gemini':
-            client = ChatGoogleGenerativeAI(api_key=api_key)
-            response = client.chat(model="gemini-pro", message="test")
+            client = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=api_key)
+            response = client.invoke(input="test")
             llm = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=api_key)
         elif llm_choice == 'OpenAI':
             openai.api_key = api_key
@@ -190,10 +190,14 @@ def main():
             api_key = st.session_state.api_key
 
     def gpt_response(message):
-        co = cohere.Client(api_key)
-        response = co.generate(
-            prompt=message,
-        )
+        if llm_choice=='Cohere':
+            co = cohere.Client(api_key)
+            response = co.generate(
+                prompt=message,
+            )
+        elif llm_choice=='Google Gemini':
+            client = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=api_key)
+            response=client.invoke(input=message)
         return response.generations[0].text.strip()
 
     if "messages" not in st.session_state.keys():
