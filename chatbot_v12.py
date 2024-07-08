@@ -55,11 +55,11 @@ def rag_retrieve(llm_choice, api_key, file_path):
     if llm_choice == 'Cohere':
         os.environ["COHERE_API_KEY"] = api_key
         embeddings = CohereEmbeddings(model="embed-english-v2.0")
-        COLLECTION_NAME = "factsheet2_test_cohere"
+        COLLECTION_NAME = "factsheet_test_cohere"
     elif llm_choice == 'Google Gemini':
         os.environ["GOOGLE_API_KEY"] = api_key
         embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-        COLLECTION_NAME = "factsheet2_test_gemini"
+        COLLECTION_NAME = "factsheet_test_gemini"
 
     engine = db.create_engine(CONNECTION_STRING)
     connection = engine.connect()
@@ -107,10 +107,6 @@ def execute_chain(query, api_key, llm_choice, user_input):
     The Schema Name is HIS_Medical and it has 15 MASTER tables: AdministrationFrequency, AdministrationRoute, DiseaseClassification, DoseUom, LocalDiseaseClassification, MedicalEncounterType, MedicalOrderItemStatus, MedicalOrderStatus, MedicalOrderType, MedicalPrescriptionType, ProcedureClassification, Specialty, SpecialtyGroup, SpecialtyType, TriageType.
 
     The Schema Name is HIS_System and it has 1 tables: Organization.
-
-    The Schema Name is HIS_Sales and it has 48 tables: AdmissionCoverageType, AdmissionDiscountType, ArInvoiceStatus, ArInvoiceType, ArItemDeliveryStatus, ArItemStatus, ArItemType, Bed, CheckupPackageItemPrice, CheckupPackagePrice, Class, ClassType, ComplexityLevel, Coverage, CoverageItem, DiscountPortionType, LimitType, PackageItemPrice, PackagePrice, Payer, PayerConfig, PayerGroup, PayerType, ProcedureRoom, ProcedureRoomType, Room, SalesDiscount, SalesDiscountGroup, SalesItem, SalesItemAttribute, SalesItemGroup, SalesItemSubType, SalesItemType, SalesMarkup, SalesOrderStatus, SalesOrderType, SalesPrice, SalesPriceConfig, SalesPriceModel, SalesPriority, SalesRequestItemDeliveryStatus, SalesRequestItemStatus, SalesRequestItemType, SalesRequestStatus, SalesRequestType, ServiceLine, TransactionLevel, Ward. These are the following columns and description in each table in the schema:
-
-    The Schema Name is HIS_SalesTrx and it has 8 tables: AdmissionCoverageItem, AdmissionDiscountItem, ArInvoice, ArItem, PayerInvoice, SalesOrder, SalesRequest, SalesRequestItem. These are the following columns and description in each table in the schema:
 
     {edit}
 
