@@ -19,8 +19,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import sqlalchemy as db
 
-username = 'yoj'
-password = '28272522Ab'
+username = 'superuser'
+password = 'sys'
 hostname = os.getenv('IRIS_HOSTNAME', 'localhost')
 port = '1972'
 namespace = 'SILOAM_DATASET'
