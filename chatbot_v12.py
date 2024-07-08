@@ -133,7 +133,7 @@ def execute_chain(query, api_key, llm_choice, user_input):
     db_sql = SQLDatabase.from_uri(CONNECTION_STRING) 
     db_chain = SQLDatabaseChain.from_llm(llm=llm, db=db_sql, prompt=PROMPT, verbose=False, return_intermediate_steps=True, use_query_checker=True)
 
-    retriever = rag_retrieve(llm_choice, api_key, "description2.txt")
+    retriever = rag_retrieve(llm_choice, api_key, "description.txt")
     
     template = """Answer the question based only on the following context:
     {context}
